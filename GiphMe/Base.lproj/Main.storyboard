@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Initial View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="InitialViewController" customModule="GiphMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Px-iC-GLb" customClass="LiveCameraView" customModule="GiphMe" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="zNN-mD-xLc"/>
+                                </constraints>
+                            </view>
+                            <searchBar contentMode="redraw" placeholder="Search Giphy" translatesAutoresizingMaskIntoConstraints="NO" id="MwU-MA-fbp">
+                                <rect key="frame" x="0.0" y="200" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="x4t-va-Dpl">
+                                <rect key="frame" x="0.0" y="244" width="600" height="356"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellId" rowHeight="150" id="efS-TX-2bw">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="150"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="efS-TX-2bw" id="BEC-rb-awK">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="149"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fk4-MV-yyi">
+                                                    <rect key="frame" x="0.0" y="-1" width="600" height="151"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="150" id="g5o-lm-A1Y"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.36095699640000001" green="0.96862745100000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="fk4-MV-yyi" firstAttribute="centerY" secondItem="BEC-rb-awK" secondAttribute="centerY" id="1OG-Tw-4ih"/>
+                                                <constraint firstItem="fk4-MV-yyi" firstAttribute="centerX" secondItem="BEC-rb-awK" secondAttribute="centerX" id="8XW-R8-nXx"/>
+                                                <constraint firstItem="fk4-MV-yyi" firstAttribute="height" secondItem="BEC-rb-awK" secondAttribute="height" id="HBk-rB-vqN"/>
+                                                <constraint firstItem="fk4-MV-yyi" firstAttribute="width" secondItem="BEC-rb-awK" secondAttribute="width" id="bBj-If-byW"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="HBk-rB-vqN"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="h4b-R6-zrB"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="8gh-QC-Jdt"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="x4t-va-Dpl" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="8ed-nf-g2e"/>
+                            <constraint firstItem="x4t-va-Dpl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GRV-V1-wMW"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="x4t-va-Dpl" secondAttribute="bottom" id="NEq-cm-8tR"/>
+                            <constraint firstItem="3Px-iC-GLb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="V2d-LD-DbI"/>
+                            <constraint firstItem="3Px-iC-GLb" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Wsc-7E-0vo"/>
+                            <constraint firstItem="MwU-MA-fbp" firstAttribute="top" secondItem="3Px-iC-GLb" secondAttribute="bottom" id="ZCF-lG-SU3"/>
+                            <constraint firstItem="MwU-MA-fbp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="a0s-av-1L2"/>
+                            <constraint firstItem="MwU-MA-fbp" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="elW-xs-gKX"/>
+                            <constraint firstItem="x4t-va-Dpl" firstAttribute="top" secondItem="MwU-MA-fbp" secondAttribute="bottom" id="hFy-av-dDr"/>
+                            <constraint firstItem="3Px-iC-GLb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wpP-2Z-guq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="initialTableView" destination="x4t-va-Dpl" id="vMT-hu-0wX"/>
+                        <outlet property="searchBar" destination="MwU-MA-fbp" id="QEM-Zg-HDs"/>
+                        <segue destination="PJU-zA-GgI" kind="show" identifier="SegueToGifViewer" id="trr-Dv-LeY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--GifViewer-->
+        <scene sceneID="ODq-94-hm7">
+            <objects>
+                <viewControllerPlaceholder storyboardName="GifViewer" id="PJU-zA-GgI" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oHp-IT-NUc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="965.5" y="450"/>
+        </scene>
+    </scenes>
+</document>
