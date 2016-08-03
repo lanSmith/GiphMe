@@ -15,7 +15,7 @@ class InitialViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     var refreshControl = UIRefreshControl()
     let cellReuseIdentifier = "gifCell"
-    var selectedGif: UIImage?
+    var selectedGifUrl: NSString?
     var gifImage: UIImage?
 
     // MARK: Lifecycle
@@ -84,31 +84,27 @@ class InitialViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let urlString = String(format: "\(DataManager.sharedManager.trendingGifs[indexPath.row].images!["original"]!["url"])")
-        let gifUrl = NSURL(string: urlString)
+        let gifUrlString = String(format: "\(DataManager.sharedManager.trendingGifs[indexPath.row].images!["original"]!["url"])")
+        self.selectedGifUrl = gifUrlString
         
-        GiphyClient.getGiphyImageAtAddress(gifUrl!) { image in
-            self.selectedGif = image
-            dispatch_async(dispatch_get_main_queue()) {
-                self.performSegueWithIdentifier("SegueToGifViewer", sender: self)
-            }
+        dispatch_async(dispatch_get_main_queue()) {
+            self.performSegueWithIdentifier("SegueToGifViewer", sender: self)
         }
     }
 
     func refresh(sender:AnyObject) {
+        initialTableView.reloadData()
+
         if self.refreshControl.refreshing {
             self.refreshControl.endRefreshing()
         }
-
-        initialTableView.reloadData()
     }
 
-    // Segue Crap
+    // Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("Segue \(segue)")
         if segue.identifier == "SegueToGifViewer" {
             if let gifViewer = segue.destinationViewController as? GifViewerViewController {
-                gifViewer.gif = selectedGif!
+                gifViewer.gifUrl = selectedGifUrl!
             }
         }
     }

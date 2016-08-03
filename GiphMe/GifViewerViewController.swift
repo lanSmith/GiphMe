@@ -8,21 +8,23 @@
 
 import Foundation
 import UIKit
+import SwiftGifOrigin
 
 class GifViewerViewController : UIViewController {
 
     @IBOutlet var fullScreenImageView: UIImageView!
-    var gif: UIImage = UIImage.init()
+    
+    var gifUrl: NSString = ""
     
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+
         fullScreenImageView.contentMode = .ScaleAspectFit
-        fullScreenImageView.image = gif
+        fullScreenImageView.image = UIImage.gifWithURL(gifUrl as String)
     }
         
-    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {    
         return UIInterfaceOrientation.Portrait;
     }
     
