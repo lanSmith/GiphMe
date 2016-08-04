@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InitialViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class InitialViewController: UIViewController, UISearchBarDelegate {
 
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var initialTableView: UITableView!
@@ -25,8 +25,6 @@ class InitialViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         // delegate assignments
         searchBar.delegate = self
-        self.initialTableView.delegate = self;
-        self.initialTableView.dataSource = self;
 
         // set up the refresh control
         refreshControl.attributedTitle = NSAttributedString(string: "pull for most up to date trendist memes. doooo ittttttt")
@@ -50,50 +48,62 @@ class InitialViewController: UIViewController, UITableViewDelegate, UITableViewD
     // MARK: Search Bar Delegate Methods
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         let searchedTerms = searchBar.text?.characters.split{$0 == " "}.map(String.init)
-        GiphyClient.searchGiphys(searchedTerms!)
+        GiphyClient.searchGiphys(searchedTerms!, completion:{
+            print("Search Result Count: \(DataManager.sharedManager.searchedGifs.count)")
+            
+            let gifUrlString = String(format: "\(DataManager.sharedManager.searchedGifs[0].images!["original"]!["url"])")
+            self.selectedGifUrl = gifUrlString
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                self.performSegueWithIdentifier("SegueToGifViewer", sender: self)
+            }
+
+        })
     }
 
     // MARK: TableView DataSource & Delegate Methods
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataManager.sharedManager.trendingGifs.count
-    }
-
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40.0;
-    }
-
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "...::|   TRENDING   |::..."
-    }
-
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = initialTableView.dequeueReusableCellWithIdentifier("cellId")!
-
-        let urlString = String(format: "\(DataManager.sharedManager.trendingGifs[indexPath.row].images!["original_still"]!["url"])")
-        let gifUrl = NSURL(string: urlString)
-
-        GiphyClient.getGiphyImageAtAddress(gifUrl!) { image in
-            self.gifImage = image!
-            let gifView: UIImageView = UIImageView.init(image: image)
-            gifView.contentMode = .ScaleAspectFill
-            gifView.frame = cell.bounds
-            cell.addSubview(gifView)
-        }
-
-        return cell
-    }
-
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let gifUrlString = String(format: "\(DataManager.sharedManager.trendingGifs[indexPath.row].images!["original"]!["url"])")
-        self.selectedGifUrl = gifUrlString
-        
-        dispatch_async(dispatch_get_main_queue()) {
-            self.performSegueWithIdentifier("SegueToGifViewer", sender: self)
-        }
-    }
-
+//    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return DataManager.sharedManager.trendingGifs.count
+//    }
+//
+//    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 40.0;
+//    }
+//
+//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "...::|   TRENDING   |::..."
+//    }
+//
+//    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        let cell: UITableViewCell = initialTableView.dequeueReusableCellWithIdentifier("cellId")!
+//
+//        let urlString = String(format: "\(DataManager.sharedManager.trendingGifs[indexPath.row].images!["original_still"]!["url"])")
+//        let gifUrl = NSURL(string: urlString)
+//
+//        GiphyClient.getGiphyImageAtAddress(gifUrl!) { image in
+//            self.gifImage = image!
+//            let gifView: UIImageView = UIImageView.init(image: image)
+//            gifView.contentMode = .ScaleAspectFill
+//            gifView.frame = cell.bounds
+//            cell.addSubview(gifView)
+//        }
+//
+//        return cell
+//    }
+//
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        let gifUrlString = String(format: "\(DataManager.sharedManager.trendingGifs[indexPath.row].images!["original"]!["url"])")
+//        self.selectedGifUrl = gifUrlString
+//        
+//        dispatch_async(dispatch_get_main_queue()) {
+//            self.performSegueWithIdentifier("SegueToGifViewer", sender: self)
+//        }
+//    }
+//
     func refresh(sender:AnyObject) {
-        initialTableView.reloadData()
+        print("reloading")
+//        TrendingTableViewController.reloadData()
+        
 
         if self.refreshControl.refreshing {
             self.refreshControl.endRefreshing()
@@ -101,7 +111,7 @@ class InitialViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     // Segue
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SegueToGifViewer" {
             if let gifViewer = segue.destinationViewController as? GifViewerViewController {
                 gifViewer.gifUrl = selectedGifUrl!

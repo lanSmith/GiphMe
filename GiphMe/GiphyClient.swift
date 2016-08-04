@@ -46,7 +46,7 @@ class GiphyClient {
         }
     }
 
-    class func searchGiphys(keywords: NSArray) {
+    class func searchGiphys(keywords: NSArray, completion:() -> Void) {
         let searchUrlString: NSString = (Constants.giphyBaseUrl as String) + (Constants.giphySearchUrl as String)
         let searchUrl: NSURL = NSURL.init(string: searchUrlString as String)!
         let searchQuery: NSString = keywords.componentsJoinedByString("+")
@@ -57,13 +57,25 @@ class GiphyClient {
                 switch response.result {
                 case .Success:
                     if let value = response.result.value {
+                        if (DataManager.sharedManager.searchedGifs.count > 0) {
+                            DataManager.sharedManager.searchedGifs.removeAll()
+                        }
+                        
                         let json = JSON(value)
 
                         let items = json["data"].arrayValue
-
+        
+                        var gifCount: Int = 0
+        
                         for attributes in items {
                             let gif = Gif.init(attributes: attributes)
                             DataManager.sharedManager.searchedGifs.append(gif)
+                            gifCount += 1
+
+                            if (gifCount == items.count) {
+                                gifCount = 0
+                                completion()
+                            }
                         }
                     }
 
