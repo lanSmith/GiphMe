@@ -15,5 +15,7 @@ struct Constants {
     static let giphyBaseUrl: NSString = "https://api.giphy.com"
     static let giphyTrendingUrl: NSString = "/v1/gifs/trending"
     static let giphySearchUrl: NSString = "/v1/gifs/search"
+    static let trendingTableViewSegue: String = "TrendingSegue"
+    static let searchedTableViewSegue: String = "SearchedSegue"
 
 }

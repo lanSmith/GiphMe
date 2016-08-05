@@ -27,11 +27,14 @@
                             <searchBar contentMode="redraw" placeholder="Search Giphy" translatesAutoresizingMaskIntoConstraints="NO" id="MwU-MA-fbp">
                                 <rect key="frame" x="0.0" y="200" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="U96-Ia-FHn"/>
+                                </connections>
                             </searchBar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IAk-jg-WzX">
                                 <rect key="frame" x="0.0" y="244" width="600" height="356"/>
                                 <connections>
-                                    <segue destination="FpM-cb-P80" kind="embed" id="n0w-K0-f0J"/>
+                                    <segue destination="ROZ-cG-dfm" kind="embed" id="7GA-z9-zXe"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -51,11 +54,33 @@
                     </view>
                     <connections>
                         <outlet property="searchBar" destination="MwU-MA-fbp" id="QEM-Zg-HDs"/>
-                        <segue destination="PJU-zA-GgI" kind="show" identifier="SegueToGifViewer" id="trr-Dv-LeY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="512" y="227"/>
+        </scene>
+        <!--Container View Controller-->
+        <scene sceneID="8pn-eT-Y5d">
+            <objects>
+                <viewController id="ROZ-cG-dfm" customClass="ContainerViewController" customModule="GiphMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rSU-cQ-YRx"/>
+                        <viewControllerLayoutGuide type="bottom" id="7eD-h4-Ole"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kDO-sP-hbe">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="356"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="FpM-cb-P80" kind="custom" identifier="TrendingSegue" customClass="EmptySegue" customModule="GiphMe" id="DEY-FT-sBY"/>
+                        <segue destination="NO8-gM-fGN" kind="custom" identifier="SearchedSegue" customClass="EmptySegue" customModule="GiphMe" id="lae-xh-iOp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aaQ-qY-OUD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1198" y="227"/>
         </scene>
         <!--GifViewer-->
         <scene sceneID="ODq-94-hm7">
@@ -63,18 +88,49 @@
                 <viewControllerPlaceholder storyboardName="GifViewer" id="PJU-zA-GgI" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oHp-IT-NUc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="965.5" y="450"/>
+            <point key="canvasLocation" x="2397.5" y="167"/>
+        </scene>
+        <!--Search Results Table View Controller-->
+        <scene sceneID="D7n-wf-F5U">
+            <objects>
+                <tableViewController id="NO8-gM-fGN" customClass="SearchResultsTableViewController" customModule="GiphMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ti2-Mp-bKd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchResultCell" id="2E2-Sb-1B1">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2E2-Sb-1B1" id="3zB-M9-BTQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="NO8-gM-fGN" id="uKd-vO-1Yl"/>
+                            <outlet property="delegate" destination="NO8-gM-fGN" id="ZnF-FF-2Kx"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="PJU-zA-GgI" kind="show" identifier="SegueToGifViewer" id="h6j-e3-7VN"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6cl-v5-GsN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1909" y="575"/>
         </scene>
         <!--Trending Table View Controller-->
         <scene sceneID="SWY-4b-Prx">
             <objects>
                 <tableViewController id="FpM-cb-P80" customClass="TrendingTableViewController" customModule="GiphMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="gAV-Kh-MIh">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="356"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" id="gAV-Kh-MIh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellId" rowHeight="150" id="efS-TX-2bw">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TrendingCell" rowHeight="150" id="efS-TX-2bw">
                                 <rect key="frame" x="0.0" y="28" width="600" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="efS-TX-2bw" id="BEC-rb-awK">
@@ -108,13 +164,16 @@
                             <outlet property="delegate" destination="FpM-cb-P80" id="0lt-2u-UDT"/>
                         </connections>
                     </tableView>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="fSC-Zr-NYI">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </refreshControl>
+                    <connections>
+                        <segue destination="PJU-zA-GgI" kind="show" identifier="SegueToGifViewer" id="yYB-MB-O40"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DUG-QI-TM3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="510" y="953"/>
+            <point key="canvasLocation" x="1909" y="-119"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="h6j-e3-7VN"/>
+    </inferredMetricsTieBreakers>
 </document>

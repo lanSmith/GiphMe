@@ -21,8 +21,9 @@
 		19903EE21D4BDEDB00C69BD1 /* GifViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19903EE11D4BDEDB00C69BD1 /* GifViewerViewController.swift */; };
 		3C3B6DA4B0EA56994BC59EFA /* Pods_GiphMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B947A17DA04CA9B5C8EFC92 /* Pods_GiphMe.framework */; };
 		3C590D241D53EC790099D01E /* TrendingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C590D231D53EC790099D01E /* TrendingTableViewController.swift */; };
-		3C8158D71D52408900E7F611 /* Pods-GiphMe.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 42C12D4E48E4F20E463867C5 /* Pods-GiphMe.debug.xcconfig */; };
-		3C8158D81D52408C00E7F611 /* Pods-GiphMe.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 42014FF418D156E9D5154324 /* Pods-GiphMe.release.xcconfig */; };
+		3C590D291D53FCD80099D01E /* EmptySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C590D281D53FCD80099D01E /* EmptySegue.swift */; };
+		3C590D2B1D53FDFE0099D01E /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C590D2A1D53FDFE0099D01E /* ContainerViewController.swift */; };
+		3C590D2D1D5400F10099D01E /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C590D2C1D5400F10099D01E /* SearchResultsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,9 @@
 		19903EE11D4BDEDB00C69BD1 /* GifViewerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifViewerViewController.swift; sourceTree = "<group>"; };
 		3B947A17DA04CA9B5C8EFC92 /* Pods_GiphMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiphMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C590D231D53EC790099D01E /* TrendingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingTableViewController.swift; sourceTree = "<group>"; };
+		3C590D281D53FCD80099D01E /* EmptySegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySegue.swift; sourceTree = "<group>"; };
+		3C590D2A1D53FDFE0099D01E /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		3C590D2C1D5400F10099D01E /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
 		42014FF418D156E9D5154324 /* Pods-GiphMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiphMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-GiphMe/Pods-GiphMe.release.xcconfig"; sourceTree = "<group>"; };
 		42C12D4E48E4F20E463867C5 /* Pods-GiphMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiphMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GiphMe/Pods-GiphMe.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,6 +86,7 @@
 				1923D8D11D4297D500901CE4 /* Models */,
 				1923D8D21D4297E600901CE4 /* Views */,
 				1923D8D01D4297CE00901CE4 /* View Controllers */,
+				3C590D251D53FBBC0099D01E /* Helpers */,
 				1923D8D31D42982D00901CE4 /* Resources */,
 				1923D8BE1D42979F00901CE4 /* AppDelegate.swift */,
 				1923D8C51D42979F00901CE4 /* Assets.xcassets */,
@@ -95,9 +100,11 @@
 			isa = PBXGroup;
 			children = (
 				1923D8C01D42979F00901CE4 /* InitialViewController.swift */,
-				19903EE11D4BDEDB00C69BD1 /* GifViewerViewController.swift */,
 				1923D8D81D429BAD00901CE4 /* LiveCameraView.swift */,
+				3C590D2A1D53FDFE0099D01E /* ContainerViewController.swift */,
 				3C590D231D53EC790099D01E /* TrendingTableViewController.swift */,
+				3C590D2C1D5400F10099D01E /* SearchResultsTableViewController.swift */,
+				19903EE11D4BDEDB00C69BD1 /* GifViewerViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -127,6 +134,14 @@
 				1923D8D41D42985100901CE4 /* Constants.swift */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		3C590D251D53FBBC0099D01E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3C590D281D53FCD80099D01E /* EmptySegue.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		705C5BEF42D5CD7D347D9739 /* Pods */ = {
@@ -214,8 +229,6 @@
 				1923D8C61D42979F00901CE4 /* Assets.xcassets in Resources */,
 				1923D8C41D42979F00901CE4 /* Main.storyboard in Resources */,
 				19903EE01D4BDE6500C69BD1 /* GifViewer.Storyboard in Resources */,
-				3C8158D71D52408900E7F611 /* Pods-GiphMe.debug.xcconfig in Resources */,
-				3C8158D81D52408C00E7F611 /* Pods-GiphMe.release.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,9 +335,12 @@
 				1923D8C11D42979F00901CE4 /* InitialViewController.swift in Sources */,
 				1923D8DD1D4A648700901CE4 /* DataManager.swift in Sources */,
 				1923D8D91D429BAD00901CE4 /* LiveCameraView.swift in Sources */,
+				3C590D2B1D53FDFE0099D01E /* ContainerViewController.swift in Sources */,
+				3C590D291D53FCD80099D01E /* EmptySegue.swift in Sources */,
 				1923D8BF1D42979F00901CE4 /* AppDelegate.swift in Sources */,
 				1923D8D51D42985100901CE4 /* Constants.swift in Sources */,
 				3C590D241D53EC790099D01E /* TrendingTableViewController.swift in Sources */,
+				3C590D2D1D5400F10099D01E /* SearchResultsTableViewController.swift in Sources */,
 				1923D8DF1D4AA44100901CE4 /* Gif.swift in Sources */,
 				1923D8DB1D4A38B100901CE4 /* GiphyClient.swift in Sources */,
 				19903EE21D4BDEDB00C69BD1 /* GifViewerViewController.swift in Sources */,
